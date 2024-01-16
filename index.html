@@ -139,12 +139,20 @@
         });
     }
 
-    function downloadImage() {
+  function downloadImage() {
         const imageSrc = document.getElementById('imageContainer').getElementsByTagName('img')[0].src;
-        const link = document.createElement('a');
-        link.href = imageSrc;
-        link.download = 'downloaded_image.jpg';
-        link.click();
+
+        fetch(imageSrc)
+            .then(response => response.blob())
+            .then(blob => {
+                const link = document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                link.download = 'downloaded_image.jpg';
+                link.click();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
     }
 
     function openPopup() {
