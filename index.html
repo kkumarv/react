@@ -95,7 +95,8 @@
 
 <div class="overlay" id="overlay"></div>
 <div class="popup" id="popup">
-    <div id="imageContainer" style="max-height: 80vh; overflow-y: auto;"></div>
+   <div id="imageContainer" style="max-height: 80vh; overflow-y: auto;"></div>
+   <button id="downloadButton" onclick="downloadImage()">Download Image</button>
     <p id="apiResponse"></p>
     <button onclick="closePopup()">Close</button>
 </div>
@@ -119,28 +120,31 @@
         .then(response => response.json())
         .then(data => { 
             // Display API response in the popup
-               const  da = 'https://api.vizorads.com/!/z6oCBVdr.jpg';
-            //  const apiImageElement = document.getElementById('apiImage');
-           // apiImageElement.src = da;
-             const imageContainer = document.getElementById('imageContainer');
+            const  da = 'https://api.vizorads.com/!/z6oCBVdr.jpg';
+            const imageContainer = document.getElementById('imageContainer');
             const imageElement = document.createElement('img');
             imageElement.src = da;
             imageElement.alt = 'API Image';
             imageContainer.innerHTML = ''; // Clear previous content
             imageContainer.appendChild(imageElement);
-         
-          //  const apiResponseElement = document.getElementById('apiResponse');
-         //   apiResponseElement.innerHTML = `<a href="${da}" target="_blank">${da}</a>`;
-          
-           // document.getElementById('apiResponse').innerText = '<a href="https://api.vizorads.com/!/z6oCBVdr.jpg" target="_blank">https://api.vizorads.com/!/z6oCBVdr.jpg</a>';
-             // document.getElementById('apiResponse').innerText = JSON.stringify(data, null, 2);
-            openPopup();
+
+            // Enable download button
+            document.getElementById('downloadButton').disabled = false;
+  openPopup();
         })
         .catch(error => {
             console.error('Error:', error);
             document.getElementById('apiResponse').innerText = 'Error occurred while processing the request.';
             openPopup();
         });
+    }
+
+    function downloadImage() {
+        const imageSrc = document.getElementById('imageContainer').getElementsByTagName('img')[0].src;
+        const link = document.createElement('a');
+        link.href = imageSrc;
+        link.download = 'downloaded_image.jpg';
+        link.click();
     }
 
     function openPopup() {
