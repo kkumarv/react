@@ -117,10 +117,19 @@
         })
         .then(response => response.json())
         .then(data => { 
-            // Display API response in the popup 
-            const  da = 'https://api.vizorads.com/!/z6oCBVdr.jpg';
-            const apiResponseElement = document.getElementById('apiResponse');
-            apiResponseElement.innerHTML = `<a href="${da}" target="_blank">${da}</a>`;
+            // Display API response in the popup
+               const  da = 'https://api.vizorads.com/!/z6oCBVdr.jpg';
+            //  const apiImageElement = document.getElementById('apiImage');
+           // apiImageElement.src = da;
+             const imageContainer = document.getElementById('imageContainer');
+            const imageElement = document.createElement('img');
+            imageElement.src = da;
+            imageElement.alt = 'API Image';
+            imageContainer.innerHTML = ''; // Clear previous content
+            imageContainer.appendChild(imageElement);
+         
+          //  const apiResponseElement = document.getElementById('apiResponse');
+         //   apiResponseElement.innerHTML = `<a href="${da}" target="_blank">${da}</a>`;
           
            // document.getElementById('apiResponse').innerText = '<a href="https://api.vizorads.com/!/z6oCBVdr.jpg" target="_blank">https://api.vizorads.com/!/z6oCBVdr.jpg</a>';
              // document.getElementById('apiResponse').innerText = JSON.stringify(data, null, 2);
