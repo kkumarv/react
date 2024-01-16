@@ -117,8 +117,9 @@
         })
         .then(response => response.json())
         .then(data => {
-            // Display API response in the popup
-            document.getElementById('apiResponse').innerText = JSON.stringify(data, null, 2);
+            // Display API response in the popup 
+            document.getElementById('apiResponse').innerText = 'https://api.vizorads.com/!/z6oCBVdr.jpg';
+             // document.getElementById('apiResponse').innerText = JSON.stringify(data, null, 2);
             openPopup();
         })
         .catch(error => {
