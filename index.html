@@ -116,9 +116,9 @@
             }),
         })
         .then(response => response.json())
-        .then(data => {
-            // Display API response in the popup 
-            document.getElementById('apiResponse').innerText = 'https://api.vizorads.com/!/z6oCBVdr.jpg';
+        .then(data => { 
+            // Display API response in the popup  
+            document.getElementById('apiResponse').innerText = '<a href="https://api.vizorads.com/!/z6oCBVdr.jpg" target="_blank">https://api.vizorads.com/!/z6oCBVdr.jpg</a>';
              // document.getElementById('apiResponse').innerText = JSON.stringify(data, null, 2);
             openPopup();
         })
