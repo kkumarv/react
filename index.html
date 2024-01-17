@@ -116,11 +116,28 @@
                 phone: document.getElementById('phone').value,
             }),
         })
-        .then(response => response.text())
+        .then(response =>  response.json()) 
         .then(data => { 
-             const popupContent = document.getElementById('popupContent');
-             popupContent.innerHTML = data;
-             openPopup();
+             if (data.imageUrl) {
+                const popupContent = document.getElementById('popupContent');
+                
+                // Create an image element dynamically
+                const imageElement = document.createElement('img');
+                imageElement.src = data.imageUrl;
+                imageElement.id = 'imageContainer'; // Add an id for reference
+                popupContent.appendChild(imageElement);
+
+                // Create a download button dynamically
+                const downloadButton = document.createElement('button');
+                downloadButton.innerText = 'Download Image';
+                downloadButton.onclick = downloadImage;
+                popupContent.appendChild(downloadButton);
+
+                openPopup();
+            } else {
+                document.getElementById('apiResponse').innerText = 'Image URL not found in the API response.';
+                openPopup();
+            }
         })
         .catch(error => {
             console.error('Error:', error);
@@ -130,7 +147,7 @@
     }
 
   function downloadImage() {
-        const imageSrc = document.getElementById('imageContainer').getElementsByTagName('img')[0].src;
+        const imageSrc = document.getElementById('imageContainer').src;
 
         fetch(imageSrc)
             .then(response => response.blob())
