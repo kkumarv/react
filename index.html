@@ -147,21 +147,14 @@
     }
 
 function downloadImage() {
-    const imageElement = document.getElementById('imageContainer');
-
-    // Create a canvas element to draw the image
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = imageElement.width;
-    canvas.height = imageElement.height;
-    ctx.drawImage(imageElement, 0, 0);
-
-    // Convert the canvas content to a data URL
-    const dataUrl = canvas.toDataURL('image/jpeg');
+    const imageContainer = document.getElementById('popupContent').getElementsByTagName('img')[0];
+    const imageSrc = imageContainer.src;
 
     // Create a link element
     const link = document.createElement('a');
-    link.href = dataUrl;
+
+    // Set the href attribute to the image source
+    link.href = imageSrc;
 
     // Set the download attribute with the desired filename
     link.download = 'downloaded_image.jpg';
