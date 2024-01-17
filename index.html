@@ -146,21 +146,26 @@
         });
     }
 
-  function downloadImage() {
-        const imageSrc = document.getElementById('imageContainer').src;
+function downloadImage() {
+    const imageSrc = document.getElementById('imageContainer').src;
 
-        fetch(imageSrc)
-            .then(response => response.blob())
-            .then(blob => {
-                const link = document.createElement('a');
-                link.href = window.URL.createObjectURL(blob);
-                link.download = 'downloaded_image.jpg';
-                link.click();
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-    }
+    // Create a link element
+    const link = document.createElement('a');
+    link.href = imageSrc;
+
+    // Set the download attribute with the desired filename
+    link.download = 'downloaded_image.jpg';
+
+    // Append the link to the document
+    document.body.appendChild(link);
+
+    // Trigger a click on the link to start the download
+    link.click();
+
+    // Remove the link from the document
+    document.body.removeChild(link);
+}
+
 
     function openPopup() {
         document.getElementById('overlay').style.display = 'block';
